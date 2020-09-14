@@ -48,26 +48,26 @@ def create_album(conn, album, year):
 def fileFilter(ele):
     return ele[0] != '.'
 
-baseFolder = 'test'
+baseFolder = 'Masters'
 conn = create_connection("photoviewer.db")
 with conn:
     for (root,dirs,files) in os.walk(baseFolder, topdown=True): 
         if root.replace(baseFolder, '').count(os.sep) == 2:
-            print(root)
-            print(dirs)
-            print(list(filter(fileFilter,files)))
-            print('--------------------------------')
+            #print(root)
+            #print(dirs)
+            #print(list(filter(fileFilter,files)))
+            #print('--------------------------------')
             year = root[root.index('/')+1:]
-            year = year[:root.index('/')]
-            print('year: ' + year)
+            year = year[:year.index('/')]
+            #print('year: ' + year)
             create_year(conn, year)
             album = os.path.basename(root)
-            print('album: ' + album)
+            #print('album: ' + album)
             album_id = create_album(conn, album, year)
-            for f in files:
+            for f in list(filter(fileFilter,files)):
                 if str(f)[0] != '.':
                     path = root + '/' + f
-                    print('path: ' + path)
+                    #print('path: ' + path)
                     photoRow = (path, album_id, 'The picture named ' + f)
                     cur = conn.cursor()
                     sql = '''INSERT INTO photos(photo_path,album,description)
