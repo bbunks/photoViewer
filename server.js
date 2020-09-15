@@ -1,6 +1,5 @@
 const sqlite3 = require("sqlite3");
 const express = require("express");
-const { response } = require("express");
 const app = express();
 const port = 3000;
 
