@@ -61,7 +61,7 @@ with conn:
             year = year[:year.index('/')]
             #print('year: ' + year)
             create_year(conn, year)
-            album = os.path.basename(root)
+            album = os.path.basename(root).replace("'", "''")
             #print('album: ' + album)
             album_id = create_album(conn, album, year)
             for f in list(filter(fileFilter,files)):
