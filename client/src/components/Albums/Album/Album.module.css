@@ -1,0 +1,18 @@
+.Album {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Album:hover {
+    background-color: #0002;
+}
+
+.LinkStyle {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.Label {
+    text-align: center;
+}

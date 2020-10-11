@@ -1,0 +1,41 @@
+.Comments {
+    padding: 1em 2em;
+    max-width: 70rem;
+    flex-grow: 1;
+}
+
+.CommentsConatiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Header {
+    padding: 1em 2em;
+    max-width: 75rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.HeaderContainer {
+    background-color: #0002;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.AddComment {
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    background-color: #0000;
+    border: none;
+    color: #fff;
+}
+
+.AddComment:focus, .AddComment:hover {
+    color: #ddd;
+    outline:0;
+}

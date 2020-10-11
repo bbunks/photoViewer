@@ -48,7 +48,7 @@ def create_album(conn, album, year):
 def fileFilter(ele):
     return ele[0] != '.'
 
-baseFolder = 'Masters'
+baseFolder = 'test'
 conn = create_connection("photoviewer.db")
 with conn:
     for (root,dirs,files) in os.walk(baseFolder, topdown=True): 

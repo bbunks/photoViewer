@@ -1,0 +1,27 @@
+.Photo {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.Photo:before {
+    content:'';
+    float:left;
+    padding-top:100%;
+}
+
+.LinkStyle {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.Label {
+    flex-grow: 1;
+}
+
+.Label:hover {
+    background-color: #0005;
+}

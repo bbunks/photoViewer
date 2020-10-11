@@ -1,0 +1,17 @@
+.Photo {
+   height: 100%;
+}
+
+.PhotoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: 60vh;
+    min-height: 15rem;
+}
+
+.Image {
+    object-fit: contain;
+    width: 100%;
+}
+
