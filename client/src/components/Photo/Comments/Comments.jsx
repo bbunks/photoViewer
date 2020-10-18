@@ -44,6 +44,8 @@ function Comments(props) {
             )}
             {showCommentForm ? (
                 <CommentForm
+                    photoid={props.photoid}
+                    closeModal={(e) => setShowCommentForm(false)}
                     close={(e) => {
                         setShowCommentForm(false);
                     }}

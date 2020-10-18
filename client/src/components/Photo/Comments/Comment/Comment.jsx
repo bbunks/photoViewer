@@ -55,7 +55,6 @@ function dateToString(date) {
 
 function Comment(props) {
     let date = new Date(props.comment.date);
-    console.log(date);
     let dateString = Number.isNaN(date) ? "Uhhhhh" : dateToString(date);
 
     return (
@@ -64,7 +63,15 @@ function Comment(props) {
                 <h3>{props.comment.authorName}</h3>
                 <p>{dateString}</p>
             </div>
-            <p className={classes.omment}>{props.comment.comment}</p>
+            <p className={classes.omment}>
+                {props.comment.comment
+                    .split("\n")
+                    .flatMap((value, index, array) =>
+                        array.length - 1 !== index // check for the last item
+                            ? [value, <br />]
+                            : value
+                    )}
+            </p>
             <hr className={classes.LineBreak} />
         </div>
     );

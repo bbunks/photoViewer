@@ -9,7 +9,7 @@ function Albums(props) {
     const { year } = useParams();
     useEffect(() => {
         axios
-            .get("/albums/" + year)
+            .get("/albums/" + year, )
             .then((response) => {
                 setAlbums((prev) => {
                     return response.data;

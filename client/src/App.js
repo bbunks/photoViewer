@@ -6,6 +6,7 @@ import Albums from "./components/Albums/Albums";
 import Photos from "./components/Photos/Photos";
 import Photo from "./components/Photo/Photo";
 import Header from "./components/Header/Header";
+import Login from "./components/Login/Login";
 
 function App() {
     return (
@@ -13,6 +14,9 @@ function App() {
             <div className={classes.App}>
                 <Header />
                 <Switch>
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
                     <Route exact path="/">
                         <Years />
                     </Route>

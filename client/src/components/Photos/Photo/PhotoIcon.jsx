@@ -6,7 +6,14 @@ import { queryURL } from "../../../axiosQuery";
 function Photo(props) {
     const { year, album } = useParams();
     let style = {
-        backgroundImage: "url(" + queryURL + "photo/" + props.photo.id + ")",
+        backgroundImage:
+            "url(" +
+            queryURL +
+            "photo/" +
+            props.photo.id +
+            "/?authorization=Bearer+" +
+            localStorage.getItem("AuthToken") +
+            ")",
     };
 
     return (

@@ -1,29 +1,22 @@
-.Modal {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: #000000f6;
-    position: fixed;
-    top: 0;
+.Page {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-.CommentForm {
-    background-color: #282C34;
-    max-width: 50rem;
-    padding: 1rem;
-    border-radius: 5px;
-    flex-grow: 1;
-    align-self: strech;
+.LoginContainer {
+    margin-top: 2rem;
+    max-width: 25rem;
     display: flex;
     flex-direction: column;
-    max-height:30rem;
+    padding: 2rem;
+    flex-grow: 1;
+    background-color: #0002;
+    align-items: stretch;
+    border-radius: 5px;
 }
 
-.TextArea {
+.LoginField {
     border-radius: 5px;
     resize: none;
     margin: 0;
@@ -35,13 +28,11 @@
       sans-serif;
 }
 
-@media only screen and (max-width: 52rem) {
-    .CommentForm {
-        border-radius: 0;
-    }
+.LoginLabel {
+    padding-bottom: .1rem;
 }
 
-.Submit {
+.Button {
     font-size: 18px;
     color: white;
     margin: 1rem 0 0 0;
@@ -54,7 +45,7 @@
     background-color: #fff2;
 }
 
-.Submit:hover {
+.Button:hover {
     background-color: #fff4;
     outline:0;
 }
@@ -63,5 +54,4 @@
     background-color: #ff000050;
     border-radius: 5px;
     padding-left: 1rem;
-    margin-bottom: 1rem;
 }
