@@ -14,6 +14,7 @@ function CommentForm(props) {
             .then((response) => {
                 console.log("Success");
                 props.closeModal();
+                props.updateComments();
             })
             .catch((error) => console.log(error));
     }

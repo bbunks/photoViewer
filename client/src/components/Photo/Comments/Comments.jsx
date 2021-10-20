@@ -45,6 +45,7 @@ function Comments(props) {
             {showCommentForm ? (
                 <CommentForm
                     photoid={props.photoid}
+                    updateComments={props.updateComments}
                     closeModal={(e) => setShowCommentForm(false)}
                     close={(e) => {
                         setShowCommentForm(false);

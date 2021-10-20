@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import classes from "./Albums.module.css";
 import { useParams } from "react-router-dom";
 import axios from "../../axiosQuery";
 import Album from "./Album/Album";
+import TitleContext from "../../context/TitleContext/TitleContext";
 
 function Albums(props) {
     const [albums, setAlbums] = useState();
     const { year } = useParams();
+    const [context, setContext] = useContext(TitleContext);
+
     useEffect(() => {
         axios
-            .get("/albums/" + year, )
+            .get("/albums/" + year)
             .then((response) => {
                 setAlbums((prev) => {
                     return response.data;
                 });
             })
             .catch((error) => console.log(error));
+
+        setContext({
+            name: year,
+            returnPath: "/",
+        });
     }, [year]);
 
     return (

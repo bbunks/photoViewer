@@ -1,14 +1,38 @@
 .Header {
+    display: flow-root;
+    text-align: center;
+    background-color: #0002;
+}
+
+.NavContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
-    text-align: center;
-    justify-content: center;
-    background-color: #0002;
+    justify-content: space-between;
 }
 
 .LinkStyle {
     text-decoration: none;
     color: #ffffff;
+    padding: 1rem;
+    justify-self: flex-start;
+}
+
+.Button {
+    font-size: 18px;
+    color: white;
+    padding: 0;
+    border-radius: 5px;
+    justify-self: flex-end;
+    padding: 0.5rem;
+    background-color: #0000;
+    border: none;
+    background-color: #fff2;
+    outline:0;
+}
+
+.Button:hover {
+    background-color: #fff4;
+    outline:0;
 }

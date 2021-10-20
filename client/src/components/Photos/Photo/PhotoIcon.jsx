@@ -7,11 +7,9 @@ function Photo(props) {
     const { year, album } = useParams();
     let style = {
         backgroundImage:
-            "url(" +
-            queryURL +
-            "photo/" +
+            "url(/photo/" +
             props.photo.id +
-            "/?authorization=Bearer+" +
+            "?authorization=Bearer+" +
             localStorage.getItem("AuthToken") +
             ")",
     };

@@ -5,12 +5,9 @@ export const queryURL =
     "//" +
     window.location.hostname +
     ":" +
-    //window.location.port +
-    "3001/";
+    window.location.port;
 
-const instance = axios.create({
-    baseURL: queryURL,
-});
+const instance = axios.create();
 
 instance.interceptors.request.use(
     (req) => {

@@ -8,16 +8,6 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 app.use(bodyParser.json());
 
-let config = { "Access-Control-Allow-Origin": "*" };
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    next();
-});
-
 let db = new sqlite3.Database(
     "photoviewer.db",
     sqlite3.OPEN_READWRITE,
@@ -38,8 +28,6 @@ app.post("/login", (req, res) => {
     SET JWTToken = ?
     WHERE id = ?`;
 
-    res.header(config);
-
     db.all(sql, [req.body.email], (err, rows) => {
         if (err) {
             res.send("There was an error");
@@ -47,28 +35,29 @@ app.post("/login", (req, res) => {
         }
 
         if (rows.length > 0) {
-            bcrypt.compare(req.body.password, rows[0]["password"], function (
-                err,
-                result
-            ) {
-                if (result) {
-                    let token = jwt.sign(
-                        {
-                            email: rows[0]["email"],
-                        },
-                        "testSecret",
-                        { expiresIn: "3h" }
-                    );
+            bcrypt.compare(
+                req.body.password,
+                rows[0]["password"],
+                function (err, result) {
+                    if (result) {
+                        let token = jwt.sign(
+                            {
+                                email: rows[0]["email"],
+                            },
+                            "testSecret",
+                            { expiresIn: "3h" }
+                        );
 
-                    //update JWT in database
-                    res.json(token);
-                    db.all(insert, [token, rows[0]["id"]], (err, rows) => {
-                        if (err) console.log(err);
-                    });
-                } else {
-                    res.sendStatus(403);
+                        //update JWT in database
+                        res.json(token);
+                        db.all(insert, [token, rows[0]["id"]], (err, rows) => {
+                            if (err) console.log(err);
+                        });
+                    } else {
+                        res.sendStatus(403);
+                    }
                 }
-            });
+            );
         } else {
             res.sendStatus(403);
         }
@@ -77,7 +66,6 @@ app.post("/login", (req, res) => {
     //bcrypt.hash("TestPassword", saltRounds, function (err, hash) {
     //    // Store hash in your password DB.
     //    console.log(hash);
-    //
 });
 
 app.get("/years", authorizeToken, (req, res) => {
@@ -141,6 +129,46 @@ app.get("/photo/:photoid", authorizeToken, (req, res) => {
     });
 });
 
+app.get("/photoDetails/:photoid", authorizeToken, (req, res) => {
+    let sql = `SELECT p.*,
+                    a.name albumName
+                FROM photos p
+                    JOIN albums a ON p.album = a.id
+                WHERE p.id =?`;
+
+    db.all(sql, [req.params.photoid], (err, rows) => {
+        if (err) {
+            res.send("There was an error");
+            throw err;
+        }
+        //console.log(rows);
+        if (rows.length === 0) {
+            res.sendStatus(404);
+        } else {
+            res.json(rows[0]);
+        }
+    });
+});
+
+app.get("/albumDetails/:albumid", authorizeToken, (req, res) => {
+    let sql = `SELECT *
+                FROM albums a
+                WHERE a.id = ?`;
+
+    db.all(sql, [req.params.albumid], (err, rows) => {
+        if (err) {
+            res.send("There was an error");
+            throw err;
+        }
+        //console.log(rows);
+        if (rows.length === 0) {
+            res.sendStatus(404);
+        } else {
+            res.json(rows[0]);
+        }
+    });
+});
+
 app.get("/comments/:photoid", authorizeToken, (req, res) => {
     let sql = `SELECT c.id,
                 comment,
@@ -159,8 +187,6 @@ app.get("/comments/:photoid", authorizeToken, (req, res) => {
 });
 
 app.post("/comments/:photoid", authorizeToken, (req, res) => {
-    res.header(config);
-
     let authToken = "";
 
     if (req.query.authorization !== undefined) {
@@ -231,7 +257,6 @@ function authorizeToken(req, res, next) {
             //console.log("Writing from Header");
         }
 
-        //console.log(authToken);
         let token = jwt.verify(authToken.substring(7), "testSecret");
 
         db.all(sql, [token.email], (err, rows) => {

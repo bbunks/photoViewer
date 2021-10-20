@@ -68,7 +68,10 @@ function Comment(props) {
                     .split("\n")
                     .flatMap((value, index, array) =>
                         array.length - 1 !== index // check for the last item
-                            ? [value, <br />]
+                            ? [
+                                  value,
+                                  <br key={props.comment.id + "" + index} />,
+                              ]
                             : value
                     )}
             </p>

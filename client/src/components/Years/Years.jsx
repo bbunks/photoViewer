@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import classes from "./Years.module.css";
 import axios from "../../axiosQuery";
 import Year from "./Year/Year";
 import Spinner from "../Spinner/Spinner";
+import TitleContext from "../../context/TitleContext/TitleContext";
 
 function Years(props) {
     const [years, setYears] = useState();
+    const [context, setContext] = useContext(TitleContext);
     useEffect(() => {
         axios
             .get("/years")
@@ -15,6 +17,11 @@ function Years(props) {
                 });
             })
             .catch((error) => console.log(error));
+
+        setContext({
+            name: "Photos",
+            returnPath: "/",
+        });
     }, []);
 
     return (
